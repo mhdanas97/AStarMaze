@@ -25,11 +25,7 @@ public class Maze {
         Cell endCell = AStar.getPathAStar(arr, 1, 1, 0);
         if (endCell != null) {
             System.out.println("End cell is " + endCell);
-            Cell temp = endCell;
-            while (temp != null) {
-                System.out.println(temp);
-                temp = temp.parent;
-            }
+            endCell.printPath();
         } else {
             System.out.println("No path found");
         }

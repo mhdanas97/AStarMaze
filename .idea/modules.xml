@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SmartMouth.iml" filepath="$PROJECT_DIR$/SmartMouth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AStarMaze.iml" filepath="$PROJECT_DIR$/AStarMaze.iml" />
     </modules>
   </component>
 </project>

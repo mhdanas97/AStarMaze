@@ -6,17 +6,17 @@ import java.util.Comparator;
 
 public class AStar {
 
-    public static final int GOAL_X = 8;
-    public static final int GOAL_Y = 11;
+    private static final int GOAL_X = 8;
+    private static final int GOAL_Y = 11;
 
 
-    public static Comparator<Cell> costComparator = new Comparator<Cell>() {
+    private static Comparator<Cell> costComparator = new Comparator<Cell>() {
 
         @Override
         public int compare(Cell c1, Cell c2) {
 
-            int distanceFromC1 = c1.cost + manhattanDistance(c1, new Cell(GOAL_X, GOAL_Y, null));
-            int distanceFromC2 = c2.cost + manhattanDistance(c2, new Cell(GOAL_X, GOAL_Y, null));
+            int distanceFromC1 = c1.getCost() + manhattanDistance(c1, new Cell(GOAL_X, GOAL_Y, null));
+            int distanceFromC2 = c2.getCost() + manhattanDistance(c2, new Cell(GOAL_X, GOAL_Y, null));
 
 
             if (distanceFromC1 > distanceFromC2) return 1;
@@ -27,13 +27,13 @@ public class AStar {
         }
     };
 
-    public static int manhattanDistance(Cell c1, Cell c2) {
+    private static int manhattanDistance(Cell c1, Cell c2) {
 
-        return Math.abs(c1.x - c2.x) + Math.abs(c1.y - c2.y);
+        return Math.abs(c1.getX() - c2.getX()) + Math.abs(c1.getY() - c2.getY());
     }
 
 
-    public static Queue<Cell> pq = new PriorityQueue<>(costComparator);
+    private static Queue<Cell> pq = new PriorityQueue<>(costComparator);
 
     public static Cell getPathAStar(int[][] arr, int x, int y, int cost) {
 
@@ -45,25 +45,22 @@ public class AStar {
 
         while (!pq.isEmpty()) {
             Cell c = pq.remove();
-            if (arr[c.x][c.y] == 9) return c;
-            arr[c.x][c.y] = 2;
+            if (arr[c.getX()][c.getY()] == 9) return c;
+            arr[c.getX()][c.getY()] = 2;
             //Add valid children
-            if (isFree(c.x - 1, c.y, arr)) pq.add(new Cell(c.x - 1, c.y, c.cost + 1, c));
-            if (isFree(c.x + 1, c.y, arr)) pq.add(new Cell(c.x + 1, c.y, c.cost + 1, c));
-            if (isFree(c.x, c.y + 1, arr)) pq.add(new Cell(c.x, c.y + 1, c.cost + 1, c));
-            if (isFree(c.x, c.y - 1, arr)) pq.add(new Cell(c.x, c.y - 1, c.cost + 1, c));
+            if (isFree(c.getX() - 1, c.getY(), arr)) pq.add(new Cell(c.getX() - 1, c.getY(), c.getCost() + 1, c));
+            if (isFree(c.getX() + 1, c.getY(), arr)) pq.add(new Cell(c.getX() + 1, c.getY(), c.getCost() + 1, c));
+            if (isFree(c.getX(), c.getY() + 1, arr)) pq.add(new Cell(c.getX(), c.getY() + 1, c.getCost() + 1, c));
+            if (isFree(c.getX(), c.getY() - 1, arr)) pq.add(new Cell(c.getX(), c.getY() - 1, c.getCost() + 1, c));
 
         }
 
         return null;
     }
 
-    public static boolean isFree(int x, int y, int[][] arr) {
+    private static boolean isFree(int x, int y, int[][] arr) {
 
-        if ((x >= 0 && x < arr.length) && (y >= 0 && y < arr[x].length) && (arr[x][y] == 0 || arr[x][y] == 9)) {
-            return true;
-        }
-        return false;
+        return (x >= 0 && x < arr.length) && (y >= 0 && y < arr[x].length) && (arr[x][y] == 0 || arr[x][y] == 9);
     }
 
 }
