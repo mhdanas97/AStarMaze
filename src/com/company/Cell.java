@@ -1,22 +1,10 @@
 package com.company;
 
 public class Cell {
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     private final int x;
     private final int y;
     private final int cost;
     private final Cell parent;
-
-    public int getCost() {
-        return cost;
-    }
 
     public Cell(int x, int y, Cell parent) {
         this.x = x;
@@ -31,6 +19,19 @@ public class Cell {
         this.cost = cost;
         this.parent = parent;
     }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
 
     public Cell getParent() {
         return this.parent;
